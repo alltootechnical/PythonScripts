@@ -1,3 +1,4 @@
+#!/usr/bin/python
 ########################################################
 # Quantum Numbers to Element Finder
 # Written by Brian Guadalupe
