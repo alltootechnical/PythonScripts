@@ -5,7 +5,7 @@
 # May 4, 2013
 # Finds the element given the quantum numbers:
 # n = principal quantum number
-# l = orbital quantum number (s=0 p=1 d=2 f=3)
+# l = orbital/azimuthal quantum number (s=0 p=1 d=2 f=3)
 # m  = magnetic quantum number
 #  l
 # m  = spin quantum number (-1/2=paired 1/2=unpaired)
@@ -28,61 +28,62 @@ tuples = [('H', '1s1'), ('He', '1s2'), ('Li', '2s1'), ('Be', 's2'), ('B', 'p1'),
 symdict = {'6s1': 'Cs', '6s2': 'Ba', '3p1': 'Al', '3p2': 'Si', '3p3': 'P', '3p4': 'S', '3p5': 'Cl', '3p6': 'Ar', '2s2': 'Be', '6p5': 'At', '6p4': 'Po', '6p6': 'Rn', '6p1': 'Tl', '6p3': 'Bi', '6p2': 'Pb', '3s1': 'Na', '3s2': 'Mg', '4f9': 'Dy', '4f8': 'Tb', '4f5': 'Sm', '4f4': 'Pm', '4f7': 'Gd', '4f6': 'Eu', '4f1': 'Ce', '2s1': 'Li', '4f3': 'Nd', '4f2': 'Pr', '6d7': 'Mt', '7s1': 'Fr', '7s2': 'Ra', '5p6': 'Xe', '5p4': 'Te', '5p5': 'I', '5p2': 'Sn', '5p3': 'Sb', '5p1': 'In', '2p1': 'B', '2p3': 'N', '2p2': 'C', '2p5': 'F', '2p4': 'O', '2p6': 'Ne', '5f8': 'Bk', '5f9': 'Cf', '5f1': 'Th', '5f2': 'Pa', '5f3': 'U', '5f4': 'Np', '5f5': 'Pu', '5f6': 'Am', '5f7': 'Cm', '4f11': 'Er', '4f10': 'Ho', '4f13': 'Yb', '4f12': 'Tm', '4f14': 'Lu', '4p6': 'Kr', '4p5': 'Br', '4p4': 'Se', '4p3': 'As', '4p2': 'Ge', '4p1': 'Ga', '6d10': 'Cn', '5f12': 'Md', '5f13': 'No', '5f10': 'Es', '5f11': 'Fm', '5f14': 'Lr', '5d2': 'Hf', '3d5': 'Mn', '3d6': 'Fe', '5d1': 'La', '5d6': 'Os', '5d7': 'Ir', '5d4': 'W', '5d5': 'Re', '5d8': 'Pt', '5d9': 'Au', '3d8': 'Ni', '3d9': 'Cu', '1s2': 'He', '1s1': 'H', '6d1': 'Ac', '6d3': 'Db', '6d2': 'Rf', '6d5': 'Bh', '6d4': 'Sg', '3d10': 'Zn', '6d6': 'Hs', '6d9': 'Rg', '6d8': 'Ds', '3d4': 'Cr', '5d3': 'Ta', '3d7': 'Co', '3d1': 'Sc', '3d2': 'Ti', '3d3': 'V', '5s2': 'Sr', '5s1': 'Rb', '4s2': 'Ca', '4s1': 'K', '7p4': 'Lv', '7p5': 'Uus', '7p6': 'Uuo', '7p1': 'Uut', '7p2': 'Fl', '7p3': 'Uup', '4d9': 'Ag', '4d8': 'Pd', '4d3': 'Nb', '4d2': 'Zr', '4d1': 'Y', '4d7': 'Rh', '4d6': 'Ru', '4d5': 'Tc', '4d4': 'Mo', '5d10': 'Hg', '4d10': 'Cd'}
 row18 = [('He', 2), ('Ne', 10), ('Ar', 18), ('Kr', 36), ('Xe', 54), ('Rn', 86)]
 
+while True:
+   n = input("n? ")
+   l = input("l? ")
+   m = input("m_l? ")
+   s = input("m_s? ")
 
-n = int(sys.argv[1])
-l = int(sys.argv[2])
-m = int(sys.argv[3])
-s = sys.argv[4]
-
-if l == 0:
-   spdf = "s"
-elif l == 1:
-   spdf = "p"
-elif l == 2:
-   spdf = "d"
-elif l == 3:
-   spdf = "f"
-else:
-   print "Argument 'l' is invalid"
-
-
-if l == 0:
-   if s == 1 / 2:
-      arrows = 1
+   if l == 0:
+      spdf = "s"
+   elif l == 1:
+      spdf = "p"
+   elif l == 2:
+      spdf = "d"
+   elif l == 3:
+      spdf = "f"
    else:
-      arrows = 2
-elif l == 1:
-   if s == 1 / 2:
-      arrows = m + 2
+      print "Argument 'l' is invalid"
+
+
+   if l == 0:
+      if s == 1 / 2:
+         arrows = 1
+      else:
+         arrows = 2
+   elif l == 1:
+      if s == 1 / 2:
+         arrows = m + 2
+      else:
+         arrows = m + 5
+   elif l == 2:
+      if s == 1 / 2:
+         arrows = m + 3
+      else:
+         arrows = m + 8
+   elif l == 3:
+      if s == 1 / 2:
+         arrows = m + 4
+      else:
+         arrows = m + 11
    else:
-      arrows = m + 5
-elif l == 2:
-   if s == 1 / 2:
-      arrows = m + 3
+      print "Arguments 'l' & 's' are invalid"  
+
+   lvl = str(n) + spdf + str(arrows)
+
+   def getElement(lvl):
+           return symdict[lvl]
+
+   def getAtomicNum(sym):
+           return atnum[sym]
+
+   print "\nThe element is: "
+   if getAtomicNum(getElement(lvl)) >= 100:
+           print "   " + getElement(lvl)
+   elif getAtomicNum(getElement(lvl)) < 10:
+           print " " + getElement(lvl)
    else:
-      arrows = m + 8
-elif l == 3:
-   if s == 1 / 2:
-      arrows = m + 4
-   else:
-      arrows = m + 11
-else:
-   print "Arguments 'l' & 's' are invalid"  
-
-lvl = str(n) + spdf + str(arrows)
-
-def getElement(lvl):
-        return symdict[lvl]
-
-def getAtomicNum(sym):
-        return atnum[sym]
-
-print "\nThe element is: "
-if getAtomicNum(getElement(lvl)) >= 100:
-        print "   " + getElement(lvl)
-elif getAtomicNum(getElement(lvl)) < 10:
-        print " " + getElement(lvl)
-else:
-        print "  " + getElement(lvl)
-print getAtomicNum(getElement(lvl))
+           print "  " + getElement(lvl)
+   print getAtomicNum(getElement(lvl))
+   print "--------------------------------------------\n"
 
